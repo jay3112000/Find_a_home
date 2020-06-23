@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "589433104861",
+    "firebase_url": "https://internapp-eeb95.firebaseio.com",
+    "project_id": "internapp-eeb95",
+    "storage_bucket": "internapp-eeb95.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589433104861:android:80497fa72eed057e4aae34",
+        "android_client_info": {
+          "package_name": "com.example.Home"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589433104861-qp59jogml2ptb7hda75u3oqh6qd6k81e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxNyV-TNOdiH2oerCw_k-K07p3EosOVIQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589433104861-qp59jogml2ptb7hda75u3oqh6qd6k81e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
