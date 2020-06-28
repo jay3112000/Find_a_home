@@ -3,6 +3,7 @@
 
 
 import 'package:Home/screens/Splashscreen.dart';
+import 'package:Home/screens/login_phone.dart';
 import 'package:flutter/material.dart';
 import 'package:Home/screens/Intro_scrren.dart';
 import 'dart:async';
@@ -26,6 +27,7 @@ void main() {
           routes:{
            SplashScreen.routeName: (ctx)=>SplashScreen(),
            OnboardingScreen.routeName:(ctx)=>OnboardingScreen(),
+           SignupPage.routename:(ctx)=>SignupPage(),
           },
 
         );

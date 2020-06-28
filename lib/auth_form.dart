@@ -1,5 +1,6 @@
+import 'package:Home/screens/login_phone.dart';
 import 'package:flutter/material.dart';
-
+import 'package:Home/screens/login_phone.dart';
 
 class AuthForm extends StatefulWidget {
   AuthForm(
@@ -145,31 +146,7 @@ class _AuthFormState extends State<AuthForm> {
                   SizedBox(
                     height: 10,
                   ),
-                  TextFormField(
-                     
-                      validator: (value) {
-                        if (value.isEmpty || value.length < 10) {
-                          return 'Please enter at least 10 characters';
-                        }
-                        return null;
-                      },
-                      
-                      decoration: InputDecoration(labelText: 'Phone Number',
-                      
-                      focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.pink),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                      ),
-                     keyboardType:TextInputType.number ,
-                     onSaved:(value) {
-                         _phonenumber=value;
-                     },
-                    ),
+                  
                   SizedBox(height: 12),
                   
                     
@@ -198,6 +175,39 @@ class _AuthFormState extends State<AuthForm> {
                           alignment: Alignment.center,
                           constraints: BoxConstraints(minHeight: 50,maxWidth: double.infinity),
                           child: Text(_isLogin ? 'Login' : 'Signup',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.center,),
+                        ),
+                      ),
+                     
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                      FlatButton(
+                      onPressed: (){
+                        Navigator.of(context).pushNamed(SignupPage.routename);
+                      },
+                      padding: EdgeInsets.all(0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
+                      child: Ink(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            begin: Alignment.centerLeft,
+                            end: Alignment.centerRight,
+                            colors: [
+                               Color(0xFFFF4081),
+                Color(0xFFEC407A),
+                Color(0xFFF06292),
+                 Color(0xFFF48FB1),
+                            ],
+                          ),
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: Container(
+                          alignment: Alignment.center,
+                          constraints: BoxConstraints(minHeight: 50,maxWidth: double.infinity),
+                          child: Text('Phone',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.center,),
                         ),
                       ),
                      
