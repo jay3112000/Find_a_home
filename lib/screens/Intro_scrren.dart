@@ -1,7 +1,7 @@
 import 'package:Home/screens/Splashscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:Home/utilities.dart';
+import 'package:Home/utils/utilities.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const routeName='/intro';

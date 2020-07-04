@@ -23,6 +23,7 @@ void main() {
       @override
       Widget build(BuildContext context) {
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           home: Splash(),
           routes:{
            SplashScreen.routeName: (ctx)=>SplashScreen(),

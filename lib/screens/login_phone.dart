@@ -6,8 +6,9 @@ class SignupPage extends StatelessWidget {
   static const routename='/phone';
   final _phoneController = TextEditingController();
   final _codeController = TextEditingController();
+  
 
-  Future loginUser(String phone, BuildContext context) async{
+  Future<bool> loginUser(String phone, BuildContext context) async{
     FirebaseAuth _auth = FirebaseAuth.instance;
 
     _auth.verifyPhoneNumber(
@@ -20,13 +21,7 @@ class SignupPage extends StatelessWidget {
 
           FirebaseUser user = result.user;
 
-          if(user != null){
-            Navigator.push(context, MaterialPageRoute(
-              builder: (context) => HomeScreen(user: user,)
-            ));
-          }else{
-            print("Error");
-          }
+        
 
           //This callback would gets called when verification is done auto maticlly
         },
@@ -61,13 +56,7 @@ class SignupPage extends StatelessWidget {
 
                       FirebaseUser user = result.user;
 
-                      if(user != null){
-                        Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => HomeScreen(user: user,)
-                        ));
-                      }else{
-                        print("Error");
-                      }
+                      
                     },
                   )
                 ],

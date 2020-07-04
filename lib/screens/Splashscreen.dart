@@ -1,4 +1,6 @@
+import 'package:Home/screens/HomeScreen.dart';
 import 'package:Home/screens/auth_screen.dart';
+import 'package:Home/sim_manager.dart';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/cupertino.dart';
@@ -48,7 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(Duration(seconds:4 ),(){
       Navigator.push(context, MaterialPageRoute(builder: (_) {
-        return AuthScreen();
+        return SimScreen();
       }));
     });
   }

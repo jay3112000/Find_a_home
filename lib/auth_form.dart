@@ -149,9 +149,10 @@ class _AuthFormState extends State<AuthForm> {
                   
                   SizedBox(height: 12),
                   
-                    
+                     if (widget.isLoading) CircularProgressIndicator(),
+                  if (!widget.isLoading)
                   
-                    FlatButton(
+                   FlatButton(
                       onPressed: _trySubmit,
                       padding: EdgeInsets.all(0),
                       shape: RoundedRectangleBorder(
@@ -174,6 +175,7 @@ class _AuthFormState extends State<AuthForm> {
                         child: Container(
                           alignment: Alignment.center,
                           constraints: BoxConstraints(minHeight: 50,maxWidth: double.infinity),
+                          
                           child: Text(_isLogin ? 'Login' : 'Signup',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),textAlign: TextAlign.center,),
                         ),
                       ),
