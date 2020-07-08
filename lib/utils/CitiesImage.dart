@@ -1,3 +1,4 @@
+import 'package:Home/screens/apartment_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'TextStyles.dart';
@@ -11,29 +12,32 @@ class CitiesImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return Container(
-        width: 160,
-        height: 160,
-        child: Stack(
-          children: <Widget>[
-            Container(
+      return GestureDetector(
+        onTap: () => Navigator.of(context).pushNamed(ApartmentScreen.routename),
+              child: Container(
+          width: 160,
+          height: 160,
+          child: Stack(
+            children: <Widget>[
+              Container(
+                  width: 160,
+                  height: 150,
+                  child: ClipRRect(
+                      borderRadius: new BorderRadius.all(Radius.circular(15.0)),
+                      child: Image(
+                        image: NetworkImage(imgUrl),
+                        fit: BoxFit.cover,
+                      ))),
+              Container(
                 width: 160,
-                height: 150,
-                child: ClipRRect(
-                    borderRadius: new BorderRadius.all(Radius.circular(15.0)),
-                    child: Image(
-                      image: NetworkImage(imgUrl),
-                      fit: BoxFit.cover,
-                    ))),
-            Container(
-              width: 160,
-              height: 160,
-              child: Align(
-                  alignment: Alignment.center,
+                height: 160,
+                child: Align(
+                    alignment: Alignment.center,
 
-                  child: BoldText(city,30,kwhite)),
-            )
-          ],
+                    child: BoldText(city,30,kwhite)),
+              )
+            ],
+          ),
         ),
       );
 

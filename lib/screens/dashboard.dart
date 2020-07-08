@@ -26,10 +26,9 @@ class _DashboardState extends State<Dashboard> {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            if(!isloading)
-            ImageContainer()
-            else CircularProgressIndicator(),
-            
+           
+            ImageContainer(),
+          
             Padding(
               padding: const EdgeInsets.only(left:16.0,right: 16.0,bottom: 16.0),
 

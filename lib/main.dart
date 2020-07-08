@@ -1,8 +1,6 @@
 
-
-
-
 import 'package:Home/screens/Splashscreen.dart';
+import 'package:Home/screens/apartment_screen.dart';
 import 'package:Home/screens/login_phone.dart';
 import 'package:flutter/material.dart';
 import 'package:Home/screens/Intro_scrren.dart';
@@ -14,6 +12,10 @@ import 'package:Home/screens/Splashscreen.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:Home/providers/apartment_provider.dart';
+import 'package:provider/provider.dart';
+import 'services/apartments_firestore_services.dart';
+
 
 void main() {
     runApp(MyApp());
@@ -22,15 +24,24 @@ void main() {
     class MyApp extends StatelessWidget {
       @override
       Widget build(BuildContext context) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: Splash(),
-          routes:{
-           SplashScreen.routeName: (ctx)=>SplashScreen(),
-           OnboardingScreen.routeName:(ctx)=>OnboardingScreen(),
-           SignupPage.routename:(ctx)=>SignupPage(),
-          },
 
+        final firestoreService = ApartmentFirestoreService();
+        return MultiProvider(
+          providers: [
+              ChangeNotifierProvider(create: (context) => ApartmentProvider()),
+            StreamProvider(create: (context)=> firestoreService.getApartments()),
+          ],
+                  child: MaterialApp(
+            debugShowCheckedModeBanner: false,
+            home: Splash(),
+            routes:{
+             SplashScreen.routeName: (ctx)=>SplashScreen(),
+             OnboardingScreen.routeName:(ctx)=>OnboardingScreen(),
+             SignupPage.routename:(ctx)=>SignupPage(),
+             ApartmentScreen.routename:(ctx)=>ApartmentScreen(),
+            },
+
+          ),
         );
       }
     }
