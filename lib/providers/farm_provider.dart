@@ -1,12 +1,13 @@
-import 'package:Home/models/apartments.dart';
+import 'package:Home/models/farm.dart';
 import 'package:Home/services/apartments_firestore_services.dart';
+import 'package:Home/services/farm_firestore_services.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class ApartmentProvider with ChangeNotifier {
-  final firestoreService = ApartmentFirestoreService('name');
+class FarmProvider with ChangeNotifier {
+  final firestoreService = FarmFirestoreService();
 
-  String _apartmentID;
+  String _farmID;
   String _name;
   String _budget;
   String _address;
@@ -15,7 +16,7 @@ class ApartmentProvider with ChangeNotifier {
   String _imageurl;
 
   //getters
-   String get apartmentID=>_apartmentID;
+   String get farmID=>_farmID;
   String get name=>_name;
   String get budget=>_budget;
   String get address=>_address;

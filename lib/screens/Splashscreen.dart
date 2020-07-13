@@ -1,5 +1,7 @@
 import 'package:Home/screens/HomeScreen.dart';
 import 'package:Home/screens/auth_screen.dart';
+import 'package:Home/screens/filter_screen.dart';
+import 'package:Home/screens/tabs_screen.dart';
 import 'package:Home/sim_manager.dart';
 
 import 'package:animated_text_kit/animated_text_kit.dart';
@@ -49,7 +51,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds:4 ),(){
-      Navigator.push(context, MaterialPageRoute(builder: (_) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) {
         return HomeScreen();
       }));
     });

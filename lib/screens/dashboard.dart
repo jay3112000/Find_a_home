@@ -1,9 +1,12 @@
+import 'package:Home/utils/FarmCategoryImage.dart';
+import 'package:Home/utils/HousesCategoryImage.dart';
+import 'package:Home/utils/RentalCategoryImage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:Home/utils/BestRatedImage.dart';
 import 'package:Home/utils/Buttons.dart';
-import 'package:Home/utils/CitiesImage.dart';
+import 'package:Home/utils/ApartmentsCategoryImage.dart';
 import 'package:Home/utils/RecommendationImage.dart';
 import 'package:Home/utils/TextStyles.dart';
 import 'package:Home/utils/consts.dart';
@@ -115,9 +118,9 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Row(
                   children: <Widget>[
-                    CitiesImage("https://cdn.dribbble.com/users/1803663/screenshots/5268088/farmhouse1.png","FARM"),
+                    FarmCategoryImage("https://cdn.dribbble.com/users/1803663/screenshots/5268088/farmhouse1.png","FARM"),
                     SizedBox(width: 28,),
-                    CitiesImage("https://cdn.dribbble.com/users/432860/screenshots/9947713/media/e6931527fa558f24edc841bcf21b99fb.png","FLATS"),
+                    ApartmentCategoryImage("https://cdn.dribbble.com/users/432860/screenshots/9947713/media/e6931527fa558f24edc841bcf21b99fb.png","FLATS"),
 
                   ],
                 ),
@@ -125,10 +128,10 @@ class _DashboardState extends State<Dashboard> {
                 SizedBox(height: 28,),
                   Row(
                     children: <Widget>[
-                      CitiesImage("https://cdn.dribbble.com/users/15687/screenshots/9714294/media/63c2b352abb9a017abc044600de1e8c0.png","HOUSE"),
+                     HousesCategoryImage("https://cdn.dribbble.com/users/15687/screenshots/9714294/media/63c2b352abb9a017abc044600de1e8c0.png","HOUSE"),
                       SizedBox(width: 28,),
 
-                      CitiesImage("https://cdn.dribbble.com/users/694830/screenshots/10867376/media/41ccd2bc00c90464819974a53bcfab7d.png","RENTAL"),
+                RentalCategoryImage("https://cdn.dribbble.com/users/694830/screenshots/10867376/media/41ccd2bc00c90464819974a53bcfab7d.png","RENTAL"),
 
                     ],
 
@@ -146,11 +149,7 @@ class _DashboardState extends State<Dashboard> {
 
   Widget buildContainer() {
     return GestureDetector(
-      onTap: (){
-        Navigator.push(context, MaterialPageRoute(builder: (_) {
-          return OverViewPage();
-        }));
-      },
+   
       child: Container(
         width: 320,
         height: 50,

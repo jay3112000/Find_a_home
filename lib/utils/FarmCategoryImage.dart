@@ -1,19 +1,19 @@
-import 'package:Home/screens/apartment_screen.dart';
+import 'package:Home/screens/farm_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'TextStyles.dart';
 import 'consts.dart';
 
-class CitiesImage extends StatelessWidget {
+class FarmCategoryImage extends StatelessWidget {
   final String imgUrl;
   final String city;
 
-  CitiesImage(this.imgUrl, this.city);
+  FarmCategoryImage (this.imgUrl, this.city);
 
   @override
   Widget build(BuildContext context) {
       return GestureDetector(
-        onTap: () => Navigator.of(context).pushNamed(ApartmentScreen.routename),
+        onTap: () => Navigator.of(context).pushNamed(FarmScreen.routename),
               child: Container(
           width: 160,
           height: 160,

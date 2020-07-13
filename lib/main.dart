@@ -1,11 +1,18 @@
-
+import 'package:Home/providers/farm_provider.dart';
+import 'package:Home/providers/houses_provider.dart';
+import 'package:Home/providers/rental_provider.dart';
 import 'package:Home/screens/Splashscreen.dart';
 import 'package:Home/screens/apartment_screen.dart';
+import 'package:Home/screens/farm_screen.dart';
+import 'package:Home/screens/houses_screen.dart';
 import 'package:Home/screens/login_phone.dart';
+import 'package:Home/screens/rental_screen.dart';
+import 'package:Home/services/farm_firestore_services.dart';
+import 'package:Home/services/houses_firestore_services.dart';
+import 'package:Home/services/rental_firestore_services.dart';
 import 'package:flutter/material.dart';
 import 'package:Home/screens/Intro_scrren.dart';
 import 'dart:async';
-
 
 import 'package:after_layout/after_layout.dart';
 import 'package:Home/screens/Splashscreen.dart';
@@ -16,36 +23,47 @@ import 'package:Home/providers/apartment_provider.dart';
 import 'package:provider/provider.dart';
 import 'services/apartments_firestore_services.dart';
 
-
 void main() {
-    runApp(MyApp());
-     
+  runApp(MyApp());
 }
-    class MyApp extends StatelessWidget {
-      @override
-      Widget build(BuildContext context) {
 
-        final firestoreService = ApartmentFirestoreService();
-        return MultiProvider(
-          providers: [
-              ChangeNotifierProvider(create: (context) => ApartmentProvider()),
-            StreamProvider(create: (context)=> firestoreService.getApartments()),
-          ],
-                  child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: Splash(),
-            routes:{
-             SplashScreen.routeName: (ctx)=>SplashScreen(),
-             OnboardingScreen.routeName:(ctx)=>OnboardingScreen(),
-             SignupPage.routename:(ctx)=>SignupPage(),
-             ApartmentScreen.routename:(ctx)=>ApartmentScreen(),
-            },
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    final apartmentfirestoreService = ApartmentFirestoreService();
+    final farmfirestoreService = FarmFirestoreService();
+    final housesfirestoreservice = HousesFirestoreService();
+    final rentalsfirestoreservice = RentalFirestoreService();
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ApartmentProvider()),
+        StreamProvider(
+            create: (context) => apartmentfirestoreService.getApartments()),
+        ChangeNotifierProvider(create: (context) => FarmProvider()),
+        StreamProvider(create: (context) => farmfirestoreService.getFarms()),
+        ChangeNotifierProvider(create: (context) => HousesProvider()),
+        StreamProvider(create: (context) => housesfirestoreservice.getHouses()),
+        ChangeNotifierProvider(create: (context) => RentalProvider()),
+        StreamProvider(create: (context) => rentalsfirestoreservice.getRentals()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Splash(),
+        routes: {
+          SplashScreen.routeName: (ctx) => SplashScreen(),
+          OnboardingScreen.routeName: (ctx) => OnboardingScreen(),
+          SignupPage.routename: (ctx) => SignupPage(),
+          ApartmentScreen.routename: (ctx) => ApartmentScreen(),
+          FarmScreen.routename: (ctx) => FarmScreen(),
+          HousesScreen.routename: (ctx) => HousesScreen(),
+          RentalsScreen.routename: (ctx) => RentalsScreen(),
+        },
+      ),
+    );
+  }
+}
 
-          ),
-        );
-      }
-    }
-  class Splash extends StatefulWidget {
+class Splash extends StatefulWidget {
   @override
   SplashState createState() => new SplashState();
 }

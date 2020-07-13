@@ -2,7 +2,7 @@ import 'package:Home/screens/dashboard.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:Home/screens/filter_screen.dart';
 /*import 'package:lets_head_out/Screens/DashBoard.dart';
 import 'package:lets_head_out/utils/TextStyles.dart';
 import 'package:lets_head_out/utils/consts.dart';
@@ -63,11 +63,13 @@ class _HomeScreenState extends State<HomeScreen> {
             BottomNavyBarItem(
               icon: Icon(Icons.line_style),
               title: Text(
-                "Orders",
+                "Filters",
                 style: TextStyle(fontFamily: "nunito"),
+                
               ),
               inactiveColor: Colors.grey,
               activeColor: Colors.pink,
+              
             ),
             BottomNavyBarItem(
               icon: Icon(Icons.notifications),
@@ -99,8 +101,8 @@ class _HomeScreenState extends State<HomeScreen> {
           },
           children: <Widget>[
              Dashboard(),
-          /*  Orders(),
-            Notifications(),
+            FilterScreen(),
+          /*  Notifications(),
             Profile(),*/
           ],
         ),
