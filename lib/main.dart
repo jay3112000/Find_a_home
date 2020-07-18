@@ -1,4 +1,5 @@
 import 'package:Home/providers/farm_provider.dart';
+
 import 'package:Home/providers/houses_provider.dart';
 import 'package:Home/providers/rental_provider.dart';
 import 'package:Home/screens/Splashscreen.dart';
@@ -45,6 +46,7 @@ class MyApp extends StatelessWidget {
         StreamProvider(create: (context) => housesfirestoreservice.getHouses()),
         ChangeNotifierProvider(create: (context) => RentalProvider()),
         StreamProvider(create: (context) => rentalsfirestoreservice.getRentals()),
+       
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
