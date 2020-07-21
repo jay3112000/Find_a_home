@@ -1,5 +1,5 @@
 
-import 'package:Home/utils/farmCard.dart';
+import 'package:Home/utils/housesCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Home/models/houses.dart';
@@ -19,11 +19,13 @@ class _HousesScreenState extends State<HousesScreen> {
             ? ListView.builder(
                 itemCount: houses.length,
                 itemBuilder: (context, index) {
-                  return FarmCard(
+                  return HousesCard(
                       houses[index].imageurl,
                     houses[index].name,
                      houses[index].address,
-                     houses[index].budget);
+                     houses[index].budget,
+                     houses[index].bedrooms,
+                     houses[index].type);
                 })
             : Center(child: CircularProgressIndicator()));
   }

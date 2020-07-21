@@ -51,7 +51,9 @@ class ApartmentCard extends StatelessWidget {
                       )),
                 ),
                 Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                  
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: BoldText(name, 20.0, kblack),
@@ -75,6 +77,7 @@ class ApartmentCard extends StatelessWidget {
                     ),
                     SizedBox(height: 20,),
                     Row(
+                      
                       children: <Widget>[
                          NormalText('budget : ', kgreyDark, 16),
                         Container(
@@ -83,7 +86,7 @@ class ApartmentCard extends StatelessWidget {
                             color: kpink2,
                             borderRadius: BorderRadius.circular(10.0),
                           ),
-                          child: Column(
+                          child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
@@ -100,6 +103,60 @@ class ApartmentCard extends StatelessWidget {
                       
                       ],
                     ),
+                    SizedBox(height: 10,),
+                     Row(
+                       children: <Widget>[
+                         NormalText('bedrooms : ', kgreyDark, 16),
+                       Container(
+                          width: 50.0,
+                          decoration: BoxDecoration(
+                            color: kpink2,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                FontAwesomeIcons.bed,
+                                color: kwhite,
+                                size: 15.0,
+                              ),
+                              SizedBox(width: 8,),
+                              BoldText(bedrooms.toString(), 15.0, kwhite)
+
+                            ],
+                          ),
+                        ),
+                       ],
+                     ),
+                     SizedBox(height: 10,),
+                     Row(
+                       children: <Widget>[
+                         NormalText('type : ', kgreyDark, 16),
+                       Container(
+                          width: 110.0,
+                          decoration: BoxDecoration(
+                            color: kpink2,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                FontAwesomeIcons.home,
+                                color: kwhite,
+                                size: 15.0,
+                              ),
+                              SizedBox(width: 8,),
+                              BoldText(type, 15.0, kwhite)
+
+                            ],
+                          ),
+                        ),
+                       ],
+                     ),
                   ],
                 ),
               ],

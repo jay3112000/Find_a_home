@@ -5,14 +5,15 @@ import 'package:provider/provider.dart';
 
 class ApartmentFirestoreService {
   Firestore _db = Firestore.instance;
-
-  Function getrooms(int value) {
+  int rooms;
+ 
+  /*Function getrooms(int value) {
     rooms = value;
     print(rooms);
-  }
+  }*/
 
-  int rooms;
-  Stream<List<Apartments>> getApartments() {
+ 
+  Stream<List<Apartments>> getApartments(rooms) {
     return _db
         .collection('properties')
         .document('jaipur')

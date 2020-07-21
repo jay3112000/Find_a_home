@@ -1,8 +1,10 @@
 import 'package:Home/models/apartments.dart';
+import 'package:Home/providers/filter_provider.dart';
 import 'package:Home/services/apartments_firestore_services.dart';
 import 'package:Home/utils/chip_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -17,7 +19,7 @@ class _FilterScreenState extends State<FilterScreen> {
 
   RangeValues values = RangeValues(1, 100);
   RangeLabels labels = RangeLabels('1', '100');
-   RangeValues values2 = RangeValues(1, 4000);
+  RangeValues values2 = RangeValues(1, 4000);
   RangeLabels labels2 = RangeLabels('1', '4000');
 
   @override
@@ -28,11 +30,12 @@ class _FilterScreenState extends State<FilterScreen> {
         backgroundColor: Colors.pink[300],
       ),
       body: SingleChildScrollView(
-              child: Column(
+        child: Column(
           children: <Widget>[
             ListTile(
               dense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               leading: Icon(
                 FontAwesomeIcons.bed,
                 color: Theme.of(context).hintColor,
@@ -62,6 +65,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   onSelected: (bool value) {
                     setState(() {
                       _selected = value;
+                     
                     });
                   },
                   elevation: 6.0,
@@ -86,8 +90,6 @@ class _FilterScreenState extends State<FilterScreen> {
                     setState(() {
                       _selected1 = value;
                     });
-
-                    ApartmentFirestoreService().getrooms(2);
                   },
                   elevation: 6.0,
                   shadowColor: Colors.grey[60],
@@ -123,7 +125,8 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             ListTile(
               dense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               leading: Icon(
                 FontAwesomeIcons.rupeeSign,
                 color: Theme.of(context).hintColor,
@@ -171,7 +174,8 @@ class _FilterScreenState extends State<FilterScreen> {
             ),
             ListTile(
               dense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               leading: Icon(
                 FontAwesomeIcons.home,
                 color: Theme.of(context).hintColor,
@@ -185,69 +189,74 @@ class _FilterScreenState extends State<FilterScreen> {
             Row(
               children: <Widget>[
                 RawChip(
-              labelPadding: EdgeInsets.all(5.0),
-              label: Text(
-                'House',
-                style: TextStyle(
-                  color: Colors.white,
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    'House',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  selected: _selected1,
+                  onSelected: (bool value) {
+                    setState(() {
+                      _selected1 = value;
+                    });
+                  },
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
                 ),
-              ),
-              backgroundColor: Colors.grey,
-              selectedColor: Colors.pink[300],
-              selected: _selected1,
-              onSelected: (bool value) {
-                setState(() {
-                  _selected1 = value;
-                });
-              },
-              elevation: 6.0,
-              shadowColor: Colors.grey[60],
-              padding: EdgeInsets.all(6.0),
-            ),
-            SizedBox(width: 5,),
-             RawChip(
-              labelPadding: EdgeInsets.all(5.0),
-              label: Text(
-                'Apartments',
-                style: TextStyle(
-                  color: Colors.white,
+                SizedBox(
+                  width: 5,
                 ),
-              ),
-              backgroundColor: Colors.grey,
-              selectedColor: Colors.pink[300],
-              selected: _selected1,
-              onSelected: (bool value) {
-                setState(() {
-                  _selected1 = value;
-                });
-              },
-              elevation: 6.0,
-              shadowColor: Colors.grey[60],
-              padding: EdgeInsets.all(6.0),
-            ),
-             SizedBox(width: 5,),
-             RawChip(
-              labelPadding: EdgeInsets.all(5.0),
-              label: Text(
-                'Farmhouse/Plots',
-                style: TextStyle(
-                  color: Colors.white,
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    'Apartments',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  selected: _selected1,
+                  onSelected: (bool value) {
+                    setState(() {
+                      _selected1 = value;
+                    });
+                  },
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
                 ),
-              ),
-              backgroundColor: Colors.grey,
-              selectedColor: Colors.pink[300],
-              selected: _selected1,
-              onSelected: (bool value) {
-                setState(() {
-                  _selected1 = value;
-                });
-              },
-              elevation: 6.0,
-              shadowColor: Colors.grey[60],
-              padding: EdgeInsets.all(6.0),
-            ),
-             SizedBox(width: 5,),
-            
+                SizedBox(
+                  width: 5,
+                ),
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    'Farmhouse/Plots',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  selected: _selected1,
+                  onSelected: (bool value) {
+                    setState(() {
+                      _selected1 = value;
+                    });
+                  },
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+                SizedBox(
+                  width: 5,
+                ),
               ],
             ),
             RawChip(
@@ -270,9 +279,10 @@ class _FilterScreenState extends State<FilterScreen> {
               shadowColor: Colors.grey[60],
               padding: EdgeInsets.all(6.0),
             ),
-              ListTile(
+            ListTile(
               dense: true,
-              contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+              contentPadding:
+                  EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               leading: Icon(
                 FontAwesomeIcons.landmark,
                 color: Theme.of(context).hintColor,
@@ -283,7 +293,7 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
               subtitle: Text('select your choice of area'),
             ),
-             SliderTheme(
+            SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 activeTrackColor: Colors.pink[300],
                 inactiveTrackColor: Colors.grey[300],
@@ -302,7 +312,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   color: Colors.white,
                 ),
               ),
-             child: RangeSlider(
+              child: RangeSlider(
                 min: 1,
                 max: 4000,
                 values: values2,
@@ -312,7 +322,8 @@ class _FilterScreenState extends State<FilterScreen> {
                   print('START: ${value2.start}, END: ${value2.end}');
                   setState(() {
                     values2 = value2;
-                    labels2 = RangeLabels('${value2.start.toInt().toString()}\sq.ft',
+                    labels2 = RangeLabels(
+                        '${value2.start.toInt().toString()}\sq.ft',
                         '${value2.end.toInt().toString()}\sq.ft');
                   });
                 },

@@ -23,7 +23,9 @@ class _RentalsScreenState extends State<RentalsScreen> {
                       rentals[index].imageurl,
                    rentals[index].name,
                      rentals[index].address,
-                     rentals[index].budget);
+                     rentals[index].budget,
+                     rentals[index].bedrooms,
+                     rentals[index].type);
                 })
             : Center(child: CircularProgressIndicator()));
   }

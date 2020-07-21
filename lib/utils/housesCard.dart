@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'TextStyles.dart';
 import 'consts.dart';
 
@@ -8,8 +8,10 @@ class HousesCard extends StatelessWidget {
   final String name;
   final String location;
   final String rate;
+  final int bedrooms;
+  final String type;
 
- HousesCard(this.imageUrl, this.name, this.location,this.rate);
+ HousesCard(this.imageUrl, this.name, this.location,this.rate,this.bedrooms,this.type);
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class HousesCard extends StatelessWidget {
                       )),
                 ),
                 Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                       Padding(
                   padding: const EdgeInsets.only(left: 8.0),
@@ -62,14 +65,18 @@ class HousesCard extends StatelessWidget {
                       
                     ],
                   ),
-                ),
-                Container(
-                        width: 50.0,
+                 ),
+                    SizedBox(height: 20,),
+                 Row(
+                 children: <Widget>[
+                       NormalText('budget : ', kgreyDark, 16),
+                 Container(
+                        width: 70.0,
                         decoration: BoxDecoration(
                           color: kpink2,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: Column(
+                        child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
@@ -82,7 +89,64 @@ class HousesCard extends StatelessWidget {
                           ],
                         ),
                       ),
+                 ],
+                 ),
+               SizedBox(height: 10,),
+                     Row(
+                       children: <Widget>[
+                         NormalText('bedrooms : ', kgreyDark, 16),
+                       Container(
+                          width: 50.0,
+                          decoration: BoxDecoration(
+                            color: kpink2,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                FontAwesomeIcons.bed,
+                                color: kwhite,
+                                size: 15.0,
+                              ),
+                              SizedBox(width: 8,),
+                              BoldText(bedrooms.toString(), 15.0, kwhite)
+
+                            ],
+                          ),
+                        ),
+                       ],
+                     ),
+                      SizedBox(height: 10,),
+                     Row(
+                       children: <Widget>[
+                         NormalText('type : ', kgreyDark, 16),
+                       Container(
+                          width: 110.0,
+                          decoration: BoxDecoration(
+                            color: kpink2,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                FontAwesomeIcons.home,
+                                color: kwhite,
+                                size: 15.0,
+                              ),
+                              SizedBox(width: 8,),
+                              BoldText(type, 15.0, kwhite)
+
+                            ],
+                          ),
+                        ),
+                       ],
+                     ),
                   ],
+                  
                 ),
                
                

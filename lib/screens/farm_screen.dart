@@ -23,7 +23,9 @@ class _FarmScreenState extends State<FarmScreen> {
                       farms[index].imageurl,
                      farms[index].name,
                       farms[index].address,
-                      farms[index].budget);
+                      farms[index].budget,
+                      farms[index].bedrooms,
+                      farms[index].type);
                 })
             : Center(child: CircularProgressIndicator()));
   }

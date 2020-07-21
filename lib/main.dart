@@ -1,4 +1,5 @@
 import 'package:Home/providers/farm_provider.dart';
+import 'package:Home/providers/filter_provider.dart';
 
 import 'package:Home/providers/houses_provider.dart';
 import 'package:Home/providers/rental_provider.dart';
@@ -35,18 +36,21 @@ class MyApp extends StatelessWidget {
     final farmfirestoreService = FarmFirestoreService();
     final housesfirestoreservice = HousesFirestoreService();
     final rentalsfirestoreservice = RentalFirestoreService();
+    
+    final int rooms = Filter().room;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ApartmentProvider()),
         StreamProvider(
-            create: (context) => apartmentfirestoreService.getApartments()),
+            create: (context) =>
+                apartmentfirestoreService.getApartments(rooms)),
         ChangeNotifierProvider(create: (context) => FarmProvider()),
         StreamProvider(create: (context) => farmfirestoreService.getFarms()),
         ChangeNotifierProvider(create: (context) => HousesProvider()),
         StreamProvider(create: (context) => housesfirestoreservice.getHouses()),
         ChangeNotifierProvider(create: (context) => RentalProvider()),
-        StreamProvider(create: (context) => rentalsfirestoreservice.getRentals()),
-       
+        StreamProvider(
+            create: (context) => rentalsfirestoreservice.getRentals()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
