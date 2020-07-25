@@ -3,6 +3,7 @@ import 'package:Home/providers/filter_provider.dart';
 
 import 'package:Home/providers/houses_provider.dart';
 import 'package:Home/providers/rental_provider.dart';
+import 'package:Home/screens/OverViewScreen.dart';
 import 'package:Home/screens/Splashscreen.dart';
 import 'package:Home/screens/apartment_screen.dart';
 import 'package:Home/screens/farm_screen.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
           FarmScreen.routename: (ctx) => FarmScreen(),
           HousesScreen.routename: (ctx) => HousesScreen(),
           RentalsScreen.routename: (ctx) => RentalsScreen(),
+          
         },
       ),
     );

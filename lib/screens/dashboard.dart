@@ -149,7 +149,9 @@ class _DashboardState extends State<Dashboard> {
 
   Widget buildContainer() {
     return GestureDetector(
-   
+    onTap: (){
+       
+      },
       child: Container(
         width: 320,
         height: 50,
