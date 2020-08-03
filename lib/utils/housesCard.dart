@@ -9,7 +9,7 @@ class HousesCard extends StatelessWidget {
   final String name;
   final String location;
   final String rate;
-  final int bedrooms;
+  final String bedrooms;
   final String type;
 
  HousesCard(this.imageUrl, this.name, this.location,this.rate,this.bedrooms,this.type);

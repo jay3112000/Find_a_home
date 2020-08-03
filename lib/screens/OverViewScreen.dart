@@ -9,7 +9,7 @@ class OverViewPage extends StatefulWidget {
     final String budget;
    final String address;
    final String type;
-   final int bedrooms;
+   final String bedrooms;
    final String imageurl;
   OverViewPage(this.name, this.budget, this.address, this.bedrooms, this.type,
       this.imageurl);

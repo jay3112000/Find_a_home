@@ -5,20 +5,17 @@ import 'package:provider/provider.dart';
 
 class ApartmentFirestoreService {
   Firestore _db = Firestore.instance;
-  int rooms;
  
   /*Function getrooms(int value) {
     rooms = value;
     print(rooms);
   }*/
 
- 
-  Stream<List<Apartments>> getApartments(rooms) {
+  Stream<List<Apartments>> getApartments() {
     return _db
         .collection('properties')
         .document('jaipur')
         .collection('apartments')
-        .where('bedrooms', isEqualTo: rooms)
         .snapshots()
         .map((snapshot) => snapshot.documents
             .map((document) => Apartments.fromFirestore(document.data))

@@ -38,13 +38,13 @@ class MyApp extends StatelessWidget {
     final housesfirestoreservice = HousesFirestoreService();
     final rentalsfirestoreservice = RentalFirestoreService();
     
-    final int rooms = Filter().room;
+   
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ApartmentProvider()),
         StreamProvider(
             create: (context) =>
-                apartmentfirestoreService.getApartments(rooms)),
+                apartmentfirestoreService.getApartments()),
         ChangeNotifierProvider(create: (context) => FarmProvider()),
         StreamProvider(create: (context) => farmfirestoreService.getFarms()),
         ChangeNotifierProvider(create: (context) => HousesProvider()),
@@ -52,6 +52,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => RentalProvider()),
         StreamProvider(
             create: (context) => rentalsfirestoreservice.getRentals()),
+
+            ChangeNotifierProvider(create: (context) => SettingsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

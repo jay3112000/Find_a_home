@@ -4,7 +4,7 @@ class Farm {
   String budget;
   String address;
   String type;
-  int bedrooms;
+  String bedrooms;
   String imageurl;
 
  Farm({

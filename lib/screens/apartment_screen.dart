@@ -3,6 +3,7 @@ import 'package:Home/utils/apartmentCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Home/models/apartments.dart';
+import 'package:Home/providers/filter_provider.dart';
 
 class ApartmentScreen extends StatefulWidget {
   static const routename = '/apartment';
@@ -13,22 +14,28 @@ class ApartmentScreen extends StatefulWidget {
 class _ApartmentScreenState extends State<ApartmentScreen> {
   @override
   Widget build(BuildContext context) {
-    final apartments = Provider.of<List<Apartments>>(context);
+    var settings = Provider.of<SettingsProvider>(context);
+    final apartments = Provider.of<List<Apartments>>(context)
+        .where((apartment) =>
+            settings.waxLines.contains(apartment.bedrooms)
+        )
+        .toList();
+
+
     return Scaffold(
         body: (apartments != null)
             ? ListView.builder(
                 itemCount: apartments.length,
                 itemBuilder: (context, index) {
+                  Apartments apartment = apartments[index];
                   return ApartmentCard(
-                      apartments[index].imageurl,
-                      apartments[index].name,
-                      apartments[index].address,
-                      apartments[index].budget,
-                      apartments[index].bedrooms,
-                      apartments[index].type,
-
-                        );
-                   
+                    apartment.imageurl,
+                    apartment.name,
+                    apartment.address,
+                    apartment.budget,
+                    apartment.bedrooms,
+                    apartment.type,
+                  );
                 })
             : Center(child: CircularProgressIndicator()));
   }

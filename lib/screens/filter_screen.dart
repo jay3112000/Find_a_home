@@ -14,9 +14,6 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen> {
-  bool _selected = false;
-  bool _selected1 = false;
-
   RangeValues values = RangeValues(1, 100);
   RangeLabels labels = RangeLabels('1', '100');
   RangeValues values2 = RangeValues(1, 4000);
@@ -24,6 +21,8 @@ class _FilterScreenState extends State<FilterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Filter Screen'),
@@ -51,7 +50,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 SizedBox(
                   width: 10,
                 ),
-                RawChip(
+                FilterChip(
                   labelPadding: EdgeInsets.all(5.0),
                   label: Text(
                     '1 BHK',
@@ -61,12 +60,14 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   backgroundColor: Colors.grey,
                   selectedColor: Colors.pink[300],
-                  selected: _selected,
+                  selected:
+                      (settingsProvider.waxLines.contains('1')) ? true : false,
                   onSelected: (bool value) {
-                    setState(() {
-                      _selected = value;
-                     
-                    });
+                    if (value == true) {
+                      settingsProvider.addWaxLine('1');
+                    } else {
+                      settingsProvider.removeWaxLine('1');
+                    }
                   },
                   elevation: 6.0,
                   shadowColor: Colors.grey[60],
@@ -75,7 +76,7 @@ class _FilterScreenState extends State<FilterScreen> {
                 SizedBox(
                   width: 10,
                 ),
-                RawChip(
+                FilterChip(
                   labelPadding: EdgeInsets.all(5.0),
                   label: Text(
                     '2 BHK',
@@ -85,11 +86,14 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   backgroundColor: Colors.grey,
                   selectedColor: Colors.pink[300],
-                  selected: _selected1,
+                  selected:
+                      (settingsProvider.waxLines.contains('2')) ? true : false,
                   onSelected: (bool value) {
-                    setState(() {
-                      _selected1 = value;
-                    });
+                    if (value == true) {
+                      settingsProvider.addWaxLine('2');
+                    } else {
+                      settingsProvider.removeWaxLine('2');
+                    }
                   },
                   elevation: 6.0,
                   shadowColor: Colors.grey[60],
@@ -137,7 +141,7 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
               subtitle: Text('select your choice of budget'),
             ),
-            SliderTheme(
+            /*  SliderTheme(
               data: SliderTheme.of(context).copyWith(
                 activeTrackColor: Colors.pink[300],
                 inactiveTrackColor: Colors.grey[300],
@@ -159,6 +163,12 @@ class _FilterScreenState extends State<FilterScreen> {
               child: RangeSlider(
                 min: 1,
                 max: 100,
+                onChangeStart: (value) {
+                  settingsProvider.setMin(value.start);
+                },
+                onChangeEnd: (value) {
+                  settingsProvider.setMax(value.end);
+                },
                 values: values,
                 divisions: 5,
                 labels: labels,
@@ -171,6 +181,146 @@ class _FilterScreenState extends State<FilterScreen> {
                   });
                 },
               ),
+            ),*/
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '10k-50k',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                 /* selectedColor: Colors.pink[300],
+                  selected: ((settingsProvider.budget.contains('10k')) &&
+                          (settingsProvider.budget.contains('50k')))
+                      ? true
+                      : false,
+                  onSelected: (bool value) {
+                    if (value == true) {
+                      settingsProvider.addbudget('10k', '50k');
+                    } else {
+                      settingsProvider.removebudget('10k', '50k');
+                    }
+                  },*/
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '50k-1lac',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  onSelected: (bool value) {},
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '1lac-5lac',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  onSelected: (bool value) {},
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '5lac-10lac',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  onSelected: (bool value) {},
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '10lac-25lac',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  onSelected: (bool value) {},
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '25lac-50lac',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  onSelected: (bool value) {},
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '50lac-75lac',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  onSelected: (bool value) {},
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+                RawChip(
+                  labelPadding: EdgeInsets.all(5.0),
+                  label: Text(
+                    '75lac-1cr',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  backgroundColor: Colors.grey,
+                  selectedColor: Colors.pink[300],
+                  onSelected: (bool value) {},
+                  elevation: 6.0,
+                  shadowColor: Colors.grey[60],
+                  padding: EdgeInsets.all(6.0),
+                ),
+              ],
             ),
             ListTile(
               dense: true,
@@ -198,12 +348,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   backgroundColor: Colors.grey,
                   selectedColor: Colors.pink[300],
-                  selected: _selected1,
-                  onSelected: (bool value) {
-                    setState(() {
-                      _selected1 = value;
-                    });
-                  },
+                  onSelected: (bool value) {},
                   elevation: 6.0,
                   shadowColor: Colors.grey[60],
                   padding: EdgeInsets.all(6.0),
@@ -221,12 +366,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   backgroundColor: Colors.grey,
                   selectedColor: Colors.pink[300],
-                  selected: _selected1,
-                  onSelected: (bool value) {
-                    setState(() {
-                      _selected1 = value;
-                    });
-                  },
+                  onSelected: (bool value) {},
                   elevation: 6.0,
                   shadowColor: Colors.grey[60],
                   padding: EdgeInsets.all(6.0),
@@ -244,12 +384,7 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   backgroundColor: Colors.grey,
                   selectedColor: Colors.pink[300],
-                  selected: _selected1,
-                  onSelected: (bool value) {
-                    setState(() {
-                      _selected1 = value;
-                    });
-                  },
+                  onSelected: (bool value) {},
                   elevation: 6.0,
                   shadowColor: Colors.grey[60],
                   padding: EdgeInsets.all(6.0),
@@ -269,12 +404,7 @@ class _FilterScreenState extends State<FilterScreen> {
               ),
               backgroundColor: Colors.grey,
               selectedColor: Colors.pink[300],
-              selected: _selected1,
-              onSelected: (bool value) {
-                setState(() {
-                  _selected1 = value;
-                });
-              },
+              onSelected: (bool value) {},
               elevation: 6.0,
               shadowColor: Colors.grey[60],
               padding: EdgeInsets.all(6.0),

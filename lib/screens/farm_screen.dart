@@ -3,6 +3,7 @@ import 'package:Home/utils/farmCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Home/models/farm.dart';
+import 'package:Home/providers/filter_provider.dart';
 
 class FarmScreen extends StatefulWidget {
   static const routename = '/farm';
@@ -13,7 +14,9 @@ class FarmScreen extends StatefulWidget {
 class _FarmScreenState extends State<FarmScreen> {
   @override
   Widget build(BuildContext context) {
-    final farms = Provider.of<List<Farm>>(context);
+  SettingsProvider settings = Provider.of<SettingsProvider>(context);
+    final farms = Provider.of<List<Farm>>(context).where((element) => element.bedrooms.contains('2')).toList()
+    ;
     return Scaffold(
         body: (farms != null)
             ? ListView.builder(
