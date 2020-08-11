@@ -1,4 +1,4 @@
-class Apartments {
+class FavApartments {
   String apartmentID;
   String name;
   String budget;
@@ -7,7 +7,7 @@ class Apartments {
   String bedrooms;
   String imageurl;
   bool isfavourite;
-  Apartments({
+  FavApartments({
     this.apartmentID,
     this.name,
     this.budget,
@@ -17,21 +17,8 @@ class Apartments {
     this.type,
     this.isfavourite,
   });
-  Map<String, dynamic> toMap() {
-    return {
-      'apartmentID': apartmentID,
-      'name': name,
-      'budget': budget,
-      'address': address,
-      'type': type,
-      'bedrooms': bedrooms,
-      'imageurl': imageurl,
-      'isfavourite': isfavourite
-    };
-  }
-  
 
-  Apartments.fromFirestore(Map<String, dynamic> firestore)
+   FavApartments.favfromFirestore(Map<String, dynamic> firestore)
       : apartmentID = firestore['apartmentID'],
         name = firestore['name'],
         budget = firestore['budget'],
@@ -40,7 +27,4 @@ class Apartments {
         bedrooms = firestore['bedrooms'],
         imageurl = firestore['imageurl'],
         isfavourite = firestore['isfavourite'];
-
- 
-        
 }

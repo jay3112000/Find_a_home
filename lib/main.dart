@@ -3,9 +3,11 @@ import 'package:Home/providers/filter_provider.dart';
 
 import 'package:Home/providers/houses_provider.dart';
 import 'package:Home/providers/rental_provider.dart';
+import 'package:Home/screens/HomeScreen.dart';
 import 'package:Home/screens/OverViewScreen.dart';
 import 'package:Home/screens/Splashscreen.dart';
 import 'package:Home/screens/apartment_screen.dart';
+import 'package:Home/screens/auth_screen.dart';
 import 'package:Home/screens/farm_screen.dart';
 import 'package:Home/screens/houses_screen.dart';
 import 'package:Home/screens/login_phone.dart';
@@ -16,7 +18,7 @@ import 'package:Home/services/rental_firestore_services.dart';
 import 'package:flutter/material.dart';
 import 'package:Home/screens/Intro_scrren.dart';
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:Home/screens/Splashscreen.dart';
 import 'package:introduction_screen/introduction_screen.dart';
@@ -37,14 +39,15 @@ class MyApp extends StatelessWidget {
     final farmfirestoreService = FarmFirestoreService();
     final housesfirestoreservice = HousesFirestoreService();
     final rentalsfirestoreservice = RentalFirestoreService();
-    
-   
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => ApartmentProvider()),
         StreamProvider(
-            create: (context) =>
-                apartmentfirestoreService.getApartments()),
+            create: (context) => apartmentfirestoreService.getApartments()),
+            ChangeNotifierProvider(create: (context) => ApartmentProvider()),
+            StreamProvider(
+            create: (context) => apartmentfirestoreService.getfavApartments()),
         ChangeNotifierProvider(create: (context) => FarmProvider()),
         StreamProvider(create: (context) => farmfirestoreService.getFarms()),
         ChangeNotifierProvider(create: (context) => HousesProvider()),
@@ -52,12 +55,18 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => RentalProvider()),
         StreamProvider(
             create: (context) => rentalsfirestoreservice.getRentals()),
-
-            ChangeNotifierProvider(create: (context) => SettingsProvider()),
+        ChangeNotifierProvider(create: (context) => SettingsProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Splash(),
+        home: StreamBuilder(
+            stream: FirebaseAuth.instance.onAuthStateChanged,
+            builder: (ctx, userSnapshot) {
+              if (userSnapshot.hasData) {
+                return SplashScreen();
+              }
+              return AuthScreen();
+            }),
         routes: {
           SplashScreen.routeName: (ctx) => SplashScreen(),
           OnboardingScreen.routeName: (ctx) => OnboardingScreen(),
@@ -66,7 +75,6 @@ class MyApp extends StatelessWidget {
           FarmScreen.routename: (ctx) => FarmScreen(),
           HousesScreen.routename: (ctx) => HousesScreen(),
           RentalsScreen.routename: (ctx) => RentalsScreen(),
-          
         },
       ),
     );

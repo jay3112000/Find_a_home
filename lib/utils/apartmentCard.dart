@@ -1,30 +1,57 @@
+import 'package:Home/providers/apartment_provider.dart';
 import 'package:Home/screens/OverViewScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:Home/models/apartments.dart';
+import 'package:Home/utils/apartmentCard.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:Home/models/apartments.dart';
+import 'package:Home/providers/filter_provider.dart';
 import 'TextStyles.dart';
 import 'consts.dart';
 
-class ApartmentCard extends StatelessWidget {
+class ApartmentCard extends StatefulWidget {
   final String imageUrl;
   final String name;
   final String location;
   final String rate;
   final String bedrooms;
   final String type;
-
+  bool isfavourite;
   ApartmentCard(this.imageUrl, this.name, this.location, this.rate,
-      this.bedrooms, this.type);
+      this.bedrooms, this.type, this.isfavourite);
 
   @override
+  _ApartmentCardState createState() => _ApartmentCardState();
+}
+
+class _ApartmentCardState extends State<ApartmentCard> {
+  @override
   Widget build(BuildContext context) {
+    final apartments = Provider.of<ApartmentProvider>(context);
+    bool fav;
+    void setfa() {
+      if (widget.isfavourite == true)
+        fav = false;
+      else
+        fav = true;
+    }
+
+    String boo = widget.name;
     return GestureDetector(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => OverViewPage(this.name, this.rate,
-                  this.location, this.bedrooms, this.type, this.imageUrl),
+              builder: (context) => OverViewPage(
+                  this.widget.name,
+                  this.widget.rate,
+                  this.widget.location,
+                  this.widget.bedrooms,
+                  this.widget.type,
+                  this.widget.imageUrl),
             ));
       },
       child: Padding(
@@ -50,7 +77,7 @@ class ApartmentCard extends StatelessWidget {
                           Radius.circular(15),
                         ),
                         child: Image(
-                          image: NetworkImage(imageUrl),
+                          image: NetworkImage(widget.imageUrl),
                           fit: BoxFit.fitHeight,
                         )),
                   ),
@@ -59,14 +86,14 @@ class ApartmentCard extends StatelessWidget {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
-                        child: BoldText(name, 20.0, kblack),
+                        child: BoldText(widget.name, 20.0, kblack),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: <Widget>[
-                            NormalText(location, kgreyDark, 16.0),
+                            NormalText(widget.location, kgreyDark, 16.0),
                             Icon(
                               Icons.location_on,
                               color: kgreyDark,
@@ -99,7 +126,7 @@ class ApartmentCard extends StatelessWidget {
                                   color: kwhite,
                                   size: 15.0,
                                 ),
-                                BoldText(rate.toString(), 15.0, kwhite)
+                                BoldText(widget.rate.toString(), 15.0, kwhite)
                               ],
                             ),
                           ),
@@ -129,7 +156,8 @@ class ApartmentCard extends StatelessWidget {
                                 SizedBox(
                                   width: 8,
                                 ),
-                                BoldText(bedrooms.toString(), 15.0, kwhite)
+                                BoldText(
+                                    widget.bedrooms.toString(), 15.0, kwhite)
                               ],
                             ),
                           ),
@@ -159,12 +187,27 @@ class ApartmentCard extends StatelessWidget {
                                 SizedBox(
                                   width: 8,
                                 ),
-                                BoldText(type, 15.0, kwhite)
+                                BoldText(widget.type, 15.0, kwhite)
                               ],
                             ),
                           ),
                         ],
                       ),
+                      SizedBox(height: 2),
+                      IconButton(
+                        icon: Icon(
+                          widget.isfavourite == true
+                              ? Icons.favorite
+                              : Icons.favorite_border,
+                          color: kpink2,
+                        ),
+                        onPressed: () {
+                          setfa();
+                          apartments.setfav(
+                            fav,boo
+                          );
+                        },
+                      )
                     ],
                   ),
                 ],

@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
-class ApartmentProvider with ChangeNotifier {
+class FavApartmentProvider with ChangeNotifier {
   final firestoreService = ApartmentFirestoreService();
   Firestore _db = Firestore.instance;
   String _apartmentID;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:Home/utils/TextStyles.dart';
 import 'package:Home/utils/consts.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 class Profile extends StatefulWidget {
   @override
   _ProfileState createState() => _ProfileState();
@@ -17,6 +17,33 @@ class _ProfileState extends State<Profile> {
         title: BoldText("Profile", 25, kblack),
         centerTitle: true,
         elevation: 0.0,
+         actions: [
+          DropdownButton(
+            icon: Icon(
+              Icons.more_vert,
+              color: Theme.of(context).primaryIconTheme.color,
+            ),
+            items: [
+              DropdownMenuItem(
+                child: Container(
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.exit_to_app),
+                      SizedBox(width: 8),
+                      Text('Logout'),
+                    ],
+                  ),
+                ),
+                value: 'logout',
+              ),
+            ],
+            onChanged: (itemIdentifier) {
+              if (itemIdentifier == 'logout') {
+                FirebaseAuth.instance.signOut();
+              }
+            },
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -89,6 +116,7 @@ class _ProfileState extends State<Profile> {
       child: Row(
               children: <Widget>[
                 Icon(icon, color: kpink2,size: 40,),
+                
                 SizedBox(width: 8,),
                 NormalText(text,kblack,20.0)
               ],

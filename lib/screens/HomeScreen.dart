@@ -1,4 +1,5 @@
 import 'package:Home/screens/dashboard.dart';
+import 'package:Home/screens/favouriteslist_screen.dart';
 import 'package:Home/screens/profile_screen.dart';
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -73,9 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
               
             ),
             BottomNavyBarItem(
-              icon: Icon(Icons.notifications),
+              icon: Icon(Icons.favorite),
               title: Text(
-                "Notifications",
+                "Favourites",
                 style: TextStyle(fontFamily: "nunito"),
               ),
               inactiveColor: Colors.grey,
@@ -103,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
              Dashboard(),
             FilterScreen(),
+            FavApartmentScreen(),
             Profile(),
           /*  Notifications(),
             Profile(),*/

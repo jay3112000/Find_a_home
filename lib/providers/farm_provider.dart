@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
 class FarmProvider with ChangeNotifier {
-  final firestoreService = FarmFirestoreService();
+ 
 
   String _farmID;
   String _name;

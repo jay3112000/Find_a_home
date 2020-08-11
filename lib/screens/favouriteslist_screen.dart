@@ -1,24 +1,22 @@
-import 'package:Home/models/apartments.dart';
+import 'package:Home/models/favorite_apartments.dart';
 import 'package:Home/utils/apartmentCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:Home/models/apartments.dart';
+
 import 'package:Home/providers/filter_provider.dart';
 
-class ApartmentScreen extends StatefulWidget {
+class FavApartmentScreen extends StatefulWidget {
   static const routename = '/apartment';
   @override
-  _ApartmentScreenState createState() => _ApartmentScreenState();
+  _FavApartmentScreenState createState() => _FavApartmentScreenState();
 }
 
-class _ApartmentScreenState extends State<ApartmentScreen> {
+class _FavApartmentScreenState extends State<FavApartmentScreen> {
   @override
   Widget build(BuildContext context) {
     var settings = Provider.of<SettingsProvider>(context);
-    final apartments = Provider.of<List<Apartments>>(context)
-        .where((apartment) =>
-            settings.waxLines.contains(apartment.bedrooms) 
-        )
+    final apartments = Provider.of<List<FavApartments>>(context)
+      
         .toList();
 
 
@@ -27,7 +25,7 @@ class _ApartmentScreenState extends State<ApartmentScreen> {
             ? ListView.builder(
                 itemCount: apartments.length,
                 itemBuilder: (context, index) {
-                  Apartments apartment = apartments[index];
+                  FavApartments apartment = apartments[index];
                   return ApartmentCard(
                     apartment.imageurl,
                     apartment.name,
