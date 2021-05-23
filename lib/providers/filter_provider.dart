@@ -4,8 +4,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 class SettingsProvider with ChangeNotifier {
   List<String> _waxLines;
   List<String> _budget;
+
+  List<int> _minmax;
   int _min;
-  int _max;
+  int _max = 100;
 
   SettingsProvider() {
     _waxLines = ['1', '2'];
@@ -20,8 +22,7 @@ class SettingsProvider with ChangeNotifier {
       '75lac',
       '1cr'
     ];
-    _min;
-    _max;
+   
 
     loadPreferences();
   }
@@ -32,10 +33,14 @@ class SettingsProvider with ChangeNotifier {
   List<String> get budget => _budget;
   int get min => _min;
   int get max => _max;
+  
   //Setters
+
+  
+
   void setUnits(String units) {
-    notifyListeners();                
-    savePreferences();       
+    notifyListeners();
+    savePreferences();
   }
 
   void _setWaxLines(List<String> waxLines) {
@@ -55,9 +60,8 @@ class SettingsProvider with ChangeNotifier {
       savePreferences();
     }
   }
-  void setMin(int value){
 
-  }
+  void setMin(int value) {}
 
   void addbudget(String budget, String budget1) {
     if (_budget.contains(budget) == false &&
@@ -84,6 +88,13 @@ class SettingsProvider with ChangeNotifier {
       notifyListeners();
       savePreferences();
     }
+  }
+
+  void setminmax(int low, int high) {
+    _min = low;
+    _max = high;
+    print(_max);
+    notifyListeners();
   }
 
   savePreferences() async {

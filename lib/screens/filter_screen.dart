@@ -1,4 +1,5 @@
 import 'package:Home/models/apartments.dart';
+import 'package:Home/providers/apartment_provider.dart';
 import 'package:Home/providers/filter_provider.dart';
 import 'package:Home/services/apartments_firestore_services.dart';
 import 'package:Home/utils/chip_widget.dart';
@@ -22,7 +23,7 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     SettingsProvider settingsProvider = Provider.of<SettingsProvider>(context);
-
+    var ap = Provider.of<ApartmentProvider>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text('Filter Screen'),
@@ -164,10 +165,10 @@ class _FilterScreenState extends State<FilterScreen> {
                 min: 1,
                 max: 100,
                 onChangeStart: (value) {
-                  settingsProvider.setMin(value.start);
+                  
                 },
                 onChangeEnd: (value) {
-                  settingsProvider.setMax(value.end);
+                  
                 },
                 values: values,
                 divisions: 5,
@@ -194,7 +195,7 @@ class _FilterScreenState extends State<FilterScreen> {
                     ),
                   ),
                   backgroundColor: Colors.grey,
-                 /* selectedColor: Colors.pink[300],
+                  /* selectedColor: Colors.pink[300],
                   selected: ((settingsProvider.budget.contains('10k')) &&
                           (settingsProvider.budget.contains('50k')))
                       ? true
@@ -218,6 +219,7 @@ class _FilterScreenState extends State<FilterScreen> {
                       color: Colors.white,
                     ),
                   ),
+                  
                   backgroundColor: Colors.grey,
                   selectedColor: Colors.pink[300],
                   onSelected: (bool value) {},
@@ -250,7 +252,19 @@ class _FilterScreenState extends State<FilterScreen> {
                   ),
                   backgroundColor: Colors.grey,
                   selectedColor: Colors.pink[300],
-                  onSelected: (bool value) {},
+                  selected: (settingsProvider.budget.contains('5lac')) &&
+                          (settingsProvider.budget.contains('10lac'))
+                      ? true
+                      : false,
+                  onSelected: (bool value) {
+                    if (value == true) {
+                      settingsProvider.addbudget('5lac', '10lac');
+                      settingsProvider.setminmax(5, 20);
+                    } else {
+                      settingsProvider.removebudget('5lac', '10lac');
+                      settingsProvider.setminmax(0, 100);
+                    }
+                  },
                   elevation: 6.0,
                   shadowColor: Colors.grey[60],
                   padding: EdgeInsets.all(6.0),

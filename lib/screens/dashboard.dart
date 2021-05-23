@@ -30,7 +30,7 @@ class _DashboardState extends State<Dashboard> {
         child: Column(
           children: <Widget>[
            
-            ImageContainer(),
+           ImageContainer(),
           
             Padding(
               padding: const EdgeInsets.only(left:16.0,right: 16.0,bottom: 16.0),
@@ -118,9 +118,9 @@ class _DashboardState extends State<Dashboard> {
                 ),
                 Row(
                   children: <Widget>[
-                    FarmCategoryImage("https://cdn.dribbble.com/users/1803663/screenshots/5268088/farmhouse1.png","FARM"),
+                    FarmCategoryImage("FARM"),
                     SizedBox(width: 28,),
-                    ApartmentCategoryImage("https://cdn.dribbble.com/users/432860/screenshots/9947713/media/e6931527fa558f24edc841bcf21b99fb.png","FLATS"),
+                    ApartmentCategoryImage("FLATS"),
 
                   ],
                 ),
@@ -128,10 +128,10 @@ class _DashboardState extends State<Dashboard> {
                 SizedBox(height: 28,),
                   Row(
                     children: <Widget>[
-                     HousesCategoryImage("https://cdn.dribbble.com/users/15687/screenshots/9714294/media/63c2b352abb9a017abc044600de1e8c0.png","HOUSE"),
+                     HousesCategoryImage("HOUSE"),
                       SizedBox(width: 28,),
 
-                RentalCategoryImage("https://cdn.dribbble.com/users/694830/screenshots/10867376/media/41ccd2bc00c90464819974a53bcfab7d.png","RENTAL"),
+                RentalCategoryImage("RENTAL"),
 
                     ],
 

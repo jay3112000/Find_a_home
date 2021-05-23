@@ -1,12 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class Apartments {
   String apartmentID;
   String name;
-  String budget;
+  int budget;
   String address;
   String type;
   String bedrooms;
   String imageurl;
   bool isfavourite;
+  /*String reveiwId;
+  String review;*/
   Apartments({
     this.apartmentID,
     this.name,
@@ -16,6 +20,8 @@ class Apartments {
     this.imageurl,
     this.type,
     this.isfavourite,
+    /*this.reveiwId,
+    this.review,*/
   });
   Map<String, dynamic> toMap() {
     return {
@@ -29,7 +35,6 @@ class Apartments {
       'isfavourite': isfavourite
     };
   }
-  
 
   Apartments.fromFirestore(Map<String, dynamic> firestore)
       : apartmentID = firestore['apartmentID'],
@@ -41,6 +46,7 @@ class Apartments {
         imageurl = firestore['imageurl'],
         isfavourite = firestore['isfavourite'];
 
- 
-        
+  static fromFireStore(DocumentSnapshot doc) {}
+  /*reveiwId = firestore['reveiwId'],
+        review = firestore['review'];*/
 }

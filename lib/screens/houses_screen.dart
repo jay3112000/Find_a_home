@@ -1,4 +1,5 @@
 
+import 'package:Home/providers/filter_provider.dart';
 import 'package:Home/utils/housesCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,12 @@ class HousesScreen extends StatefulWidget {
 class _HousesScreenState extends State<HousesScreen> {
   @override
   Widget build(BuildContext context) {
-    final houses = Provider.of<List<Houses>>(context);
+    var settings = Provider.of<SettingsProvider>(context);
+    final houses = Provider.of<List<Houses>>(context)
+     .where((apartment) =>
+            settings.waxLines.contains(apartment.bedrooms) && apartment.budget<settings.max
+        )
+        .toList();
     return Scaffold(
         body: (houses != null)
             ? ListView.builder(

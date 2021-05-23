@@ -2,6 +2,7 @@ import 'package:Home/models/favorite_apartments.dart';
 import 'package:Home/utils/apartmentCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:Home/providers/apartment_provider.dart';
 
 import 'package:Home/providers/filter_provider.dart';
 
@@ -15,12 +16,15 @@ class _FavApartmentScreenState extends State<FavApartmentScreen> {
   @override
   Widget build(BuildContext context) {
     var settings = Provider.of<SettingsProvider>(context);
-    final apartments = Provider.of<List<FavApartments>>(context)
-      
-        .toList();
+    var ap = Provider.of<ApartmentProvider>(context);
+    final apartments = Provider.of<List<FavApartments>>(context) .toList();
+    
+    //final farms = Provider.of<List<FavFa>>(context) .toList();
+    
 
 
     return Scaffold(
+      
         body: (apartments != null)
             ? ListView.builder(
                 itemCount: apartments.length,

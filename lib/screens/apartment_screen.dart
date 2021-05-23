@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:Home/models/apartments.dart';
 import 'package:Home/providers/filter_provider.dart';
+import 'package:Home/providers/apartment_provider.dart';
 
 class ApartmentScreen extends StatefulWidget {
   static const routename = '/apartment';
@@ -15,12 +16,13 @@ class _ApartmentScreenState extends State<ApartmentScreen> {
   @override
   Widget build(BuildContext context) {
     var settings = Provider.of<SettingsProvider>(context);
+    var ap = Provider.of<ApartmentProvider>(context);
     final apartments = Provider.of<List<Apartments>>(context)
         .where((apartment) =>
-            settings.waxLines.contains(apartment.bedrooms) 
-        )
+            settings.waxLines.contains(apartment.bedrooms) &&
+            apartment.budget < settings.max)
         .toList();
-
+    
 
     return Scaffold(
         body: (apartments != null)

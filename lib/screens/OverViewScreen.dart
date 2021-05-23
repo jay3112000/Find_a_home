@@ -1,19 +1,31 @@
+import 'package:Home/providers/review_provider.dart';
+import 'package:Home/screens/review.dart';
 import 'package:flutter/material.dart';
 import 'package:Home/utils/Buttons.dart';
 import 'package:Home/utils/TextStyles.dart';
 import 'package:Home/utils/consts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:Home/models/apartments.dart';
+import 'package:Home/utils/apartmentCard.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:Home/models/apartments.dart';
+import 'package:Home/providers/filter_provider.dart';
+import 'package:Home/providers/apartment_provider.dart';
+import 'package:Home/models/reviews.dart';
+import 'package:Home/services/review_firestore_service.dart';
+
 class OverViewPage extends StatefulWidget {
   static const routename = 'overview';
- final String name;
-    final String budget;
-   final String address;
-   final String type;
-   final String bedrooms;
-   final String imageurl;
+  final String name;
+  final int budget;
+  final String address;
+  final String type;
+  final String bedrooms;
+  final String imageurl;
   OverViewPage(this.name, this.budget, this.address, this.bedrooms, this.type,
       this.imageurl);
-  @override
+
   _OverViewPageState createState() => _OverViewPageState();
 }
 
@@ -23,6 +35,11 @@ class _OverViewPageState extends State<OverViewPage>
 
   @override
   Widget build(BuildContext context) {
+    //final reviewfirestoresrvice = ReviewFirestoreService();
+    final apartments = Provider.of<List<Apartments>>(context);
+    var ap = Provider.of<Reviewprovider>(context);
+    final rev = Provider.of<List<Review>>(context).toList();
+   
     return Scaffold(
       backgroundColor: kwhite,
       body: Stack(
@@ -30,9 +47,9 @@ class _OverViewPageState extends State<OverViewPage>
           Positioned(
             top: 0,
             child: Container(
-                width: MediaQuery.of(context).size.width,
-                child: Image(image: NetworkImage(widget.imageurl)),
-          ),
+              width: MediaQuery.of(context).size.width,
+              child: Image(image: NetworkImage(widget.imageurl)),
+            ),
           ),
           Positioned(
             top: 257.0,
@@ -40,7 +57,7 @@ class _OverViewPageState extends State<OverViewPage>
               borderRadius: BorderRadius.circular(20.0),
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 400,
+                height: 700,
                 child: Scaffold(
                   appBar: TabBar(
                     labelColor: kdarkBlue,
@@ -83,29 +100,32 @@ class _OverViewPageState extends State<OverViewPage>
                                   height: 10,
                                 ),
                                 Row(
-                        children: <Widget>[
-                         
-                          Container(
-                            width: 90.0,
-                            decoration: BoxDecoration(
-                              color: kpink2,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: <Widget>[
-                                Icon(
-                                  FontAwesomeIcons.rupeeSign,
-                                  color: kwhite,
-                                  size: 15.0,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 90.0,
+                                      decoration: BoxDecoration(
+                                        color: kpink2,
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            FontAwesomeIcons.rupeeSign,
+                                            color: kwhite,
+                                            size: 15.0,
+                                          ),
+                                          BoldText(widget.budget.toString(),
+                                              20.0, kwhite)
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                BoldText(widget.budget.toString(), 20.0, kwhite)
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
                                 SizedBox(
                                   height: 10.0,
                                 ),
@@ -120,7 +140,8 @@ class _OverViewPageState extends State<OverViewPage>
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: <Widget>[
-                                    BoldText("About this Property", 20.0, kblack),
+                                    BoldText(
+                                        "About this Property", 20.0, kblack),
                                     BoldText("More", 16, kdarkBlue)
                                   ],
                                 ),
@@ -241,12 +262,18 @@ class _OverViewPageState extends State<OverViewPage>
                                     SizedBox(
                                       height: 16,
                                     ),
-                                    reviewProfile(
-                                        "Hichem", "5.0", "05,Mar,2020"),
-                                    reviewProfile(
-                                        "Walid", "3.5", "17,feb,2020"),
-                                    reviewProfile(
-                                        "kratos", "4.0", "10,jan,2020"),
+                                    Container(
+                                      height: 1000,
+                                      child: ListView.builder(
+                                          itemCount: rev.length,
+                                          itemBuilder: (context, index) {
+                                            Review revi = rev[index];
+                                            return reviewProfile(
+                                                revi.userid,
+                                                revi.review,
+                                                DateTime.now().toString());
+                                          }),
+                                    )
                                   ],
                                 ),
                               ),
@@ -273,9 +300,18 @@ class _OverViewPageState extends State<OverViewPage>
               ),
             ),
           ),
-          
         ],
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.pink[200],
+          child: Icon(Icons.add),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => Reviewadd(widget.name)));
+          }),
     );
   }
 
@@ -323,7 +359,8 @@ class _OverViewPageState extends State<OverViewPage>
                     color: kwhite,
                     size: 15.0,
                   ),
-                  BoldText(review, 15.0, kwhite),
+                  BoldText('4', 15, kwhite)
+                  // BoldText(review, 15.0, kwhite),
                 ],
               ),
             ),
@@ -336,10 +373,7 @@ class _OverViewPageState extends State<OverViewPage>
         SizedBox(
           height: 10,
         ),
-        NormalText(
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.",
-            kblack,
-            12.0),
+        NormalText(review, kblack, 12.0),
         SizedBox(
           height: 10,
         ),

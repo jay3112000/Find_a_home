@@ -17,7 +17,7 @@ class ImageContainer extends StatelessWidget {
           Align(
             alignment: Alignment.topCenter,
             child: Image(
-              image: NetworkImage("https://cdn.dribbble.com/users/330915/screenshots/9080033/media/f67ff8134295d7179e6215bd84264665.gif"),
+              image: AssetImage('lib/assets/home2.gif'),
               fit: BoxFit.fill,
             ),
           ),

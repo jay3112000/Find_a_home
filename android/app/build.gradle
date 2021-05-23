@@ -56,7 +56,7 @@ android {
             minifyEnabled true
         }
        
-    }
+    }uion[]
 }
 
 flutter {

@@ -5,10 +5,10 @@ import 'TextStyles.dart';
 import 'consts.dart';
 
 class HousesCategoryImage extends StatelessWidget {
-  final String imgUrl;
+  
   final String city;
 
-  HousesCategoryImage (this.imgUrl, this.city);
+  HousesCategoryImage ( this.city);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class HousesCategoryImage extends StatelessWidget {
                   child: ClipRRect(
                       borderRadius: new BorderRadius.all(Radius.circular(15.0)),
                       child: Image(
-                        image: NetworkImage(imgUrl),
+                        image: AssetImage('lib/assets/house.jpg'),
                         fit: BoxFit.cover,
                       ))),
               Container(

@@ -1,7 +1,7 @@
 class FavApartments {
   String apartmentID;
   String name;
-  String budget;
+  int budget;
   String address;
   String type;
   String bedrooms;

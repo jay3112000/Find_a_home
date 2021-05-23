@@ -1,4 +1,5 @@
 
+import 'package:Home/providers/filter_provider.dart';
 import 'package:Home/utils/rentalCard.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +14,11 @@ class RentalsScreen extends StatefulWidget {
 class _RentalsScreenState extends State<RentalsScreen> {
   @override
   Widget build(BuildContext context) {
-    final rentals = Provider.of<List<Rentals>>(context);
+    var settings = Provider.of<SettingsProvider>(context);
+    final rentals = Provider.of<List<Rentals>>(context) .where((apartment) =>
+            settings.waxLines.contains(apartment.bedrooms) && apartment.budget<settings.max
+        )
+        .toList();
     return Scaffold(
         body: (rentals != null)
             ? ListView.builder(

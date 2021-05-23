@@ -1,4 +1,5 @@
 import 'package:Home/providers/apartment_provider.dart';
+import 'package:Home/providers/review_provider.dart';
 import 'package:Home/screens/OverViewScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,7 +17,7 @@ class ApartmentCard extends StatefulWidget {
   final String imageUrl;
   final String name;
   final String location;
-  final String rate;
+  final int rate;
   final String bedrooms;
   final String type;
   bool isfavourite;
@@ -30,7 +31,10 @@ class ApartmentCard extends StatefulWidget {
 class _ApartmentCardState extends State<ApartmentCard> {
   @override
   Widget build(BuildContext context) {
+    var settings = Provider.of<SettingsProvider>(context);
     final apartments = Provider.of<ApartmentProvider>(context);
+    var ap = Provider.of<Reviewprovider>(context);
+
     bool fav;
     void setfa() {
       if (widget.isfavourite == true)
@@ -53,6 +57,7 @@ class _ApartmentCardState extends State<ApartmentCard> {
                   this.widget.type,
                   this.widget.imageUrl),
             ));
+        ap.getname('mahima elanza');
       },
       child: Padding(
         padding: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
@@ -203,9 +208,7 @@ class _ApartmentCardState extends State<ApartmentCard> {
                         ),
                         onPressed: () {
                           setfa();
-                          apartments.setfav(
-                            fav,boo
-                          );
+                          apartments.setfav(fav, boo);
                         },
                       )
                     ],

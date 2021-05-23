@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'TextStyles.dart';
 import 'consts.dart';
@@ -21,8 +22,9 @@ class WideButton extends StatelessWidget {
           color: korange,
           shape: new RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(25)),
-          child: isBold? BoldText(text,22.5,kwhite):NormalText(text, kwhite, 22.5),
+          child: Text('cdchdshcisdc'),
         onPressed: onPressed,
+        
     ));
   }
 }
@@ -64,6 +66,7 @@ class SquaredIcon extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Icon(icon,size: 50,color: kgreyDark,),
+                
                 SizedBox(
                   height: 5,
                 ),

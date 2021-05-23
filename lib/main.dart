@@ -3,6 +3,7 @@ import 'package:Home/providers/filter_provider.dart';
 
 import 'package:Home/providers/houses_provider.dart';
 import 'package:Home/providers/rental_provider.dart';
+import 'package:Home/providers/review_provider.dart';
 import 'package:Home/screens/HomeScreen.dart';
 import 'package:Home/screens/OverViewScreen.dart';
 import 'package:Home/screens/Splashscreen.dart';
@@ -15,6 +16,7 @@ import 'package:Home/screens/rental_screen.dart';
 import 'package:Home/services/farm_firestore_services.dart';
 import 'package:Home/services/houses_firestore_services.dart';
 import 'package:Home/services/rental_firestore_services.dart';
+import 'package:Home/services/review_firestore_service.dart';
 import 'package:flutter/material.dart';
 import 'package:Home/screens/Intro_scrren.dart';
 import 'dart:async';
@@ -39,9 +41,12 @@ class MyApp extends StatelessWidget {
     final farmfirestoreService = FarmFirestoreService();
     final housesfirestoreservice = HousesFirestoreService();
     final rentalsfirestoreservice = RentalFirestoreService();
-
+    //final reviewfirestoresrvice=ReviewFirestoreService();
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => Reviewprovider()),
+        StreamProvider(create: (context)=> Reviewprovider().getReviews()),
+
         ChangeNotifierProvider(create: (context) => ApartmentProvider()),
         StreamProvider(
             create: (context) => apartmentfirestoreService.getApartments()),

@@ -1,12 +1,12 @@
 class Houses {
   String houseID;
   String name;
-  String budget;
+  int budget;
   String address;
   String type;
   String bedrooms;
   String imageurl;
-
+ bool isfavourite;
   Houses({
     this.houseID,
     this.name,
@@ -15,6 +15,7 @@ class Houses {
     this.bedrooms,
     this.imageurl,
     this.type,
+    this.isfavourite
   });
   Map<String, dynamic> toMap() {
     return {
@@ -25,6 +26,7 @@ class Houses {
       'type': type,
       'bedrooms': bedrooms,
       'imageurl': imageurl,
+       'isfavourite':isfavourite
     };
   }
 
@@ -35,5 +37,6 @@ class Houses {
         address = firestore['address'],
         type = firestore['type'],
         bedrooms = firestore['bedrooms'],
-        imageurl = firestore['imageurl'];
+        imageurl = firestore['imageurl'],
+         isfavourite=firestore['isfavourite'];
 }

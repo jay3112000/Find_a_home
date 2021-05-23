@@ -91,7 +91,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: <Widget>[
                             Center(
                               child: Image(
-                                image: NetworkImage('https://cdn.dribbble.com/users/330915/screenshots/6219071/5_chicago_dribbble.jpg'),
+                                image: AssetImage('lib/assets/intro1.jpg'),
                                 height: 300.0,
                                 width: 300.0,
                               ),
@@ -116,7 +116,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: <Widget>[
                             Center(
                               child: Image(
-                                image: NetworkImage('https://cdn.dribbble.com/users/330915/screenshots/4850332/city_dribbble.jpg'),
+                                image: AssetImage('lib/assets/intro2.jpg'),
                                 height: 300.0,
                                 width: 300.0,
                               ),
@@ -141,7 +141,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: <Widget>[
                             Center(
                               child: Image(
-                                image: NetworkImage('https://cdn.dribbble.com/users/330915/screenshots/6237451/4_washington_dribbble.jpg'),
+                                image: AssetImage('lib/assets/intro3.jpg'),
                                 height: 300.0,
                                 width: 300.0,
                               ),

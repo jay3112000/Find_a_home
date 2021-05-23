@@ -14,9 +14,13 @@ class FarmScreen extends StatefulWidget {
 class _FarmScreenState extends State<FarmScreen> {
   @override
   Widget build(BuildContext context) {
-  SettingsProvider settings = Provider.of<SettingsProvider>(context);
-    final farms = Provider.of<List<Farm>>(context).where((element) => element.bedrooms.contains('2')).toList()
-    ;
+    SettingsProvider settings = Provider.of<SettingsProvider>(context);
+    final farms = Provider.of<List<Farm>>(context)
+     .where((apartment) =>
+            settings.waxLines.contains(apartment.bedrooms) && apartment.budget<settings.max
+        )
+        .toList();
+    
     return Scaffold(
         body: (farms != null)
             ? ListView.builder(
@@ -24,11 +28,12 @@ class _FarmScreenState extends State<FarmScreen> {
                 itemBuilder: (context, index) {
                   return FarmCard(
                       farms[index].imageurl,
-                     farms[index].name,
+                      farms[index].name,
                       farms[index].address,
                       farms[index].budget,
                       farms[index].bedrooms,
-                      farms[index].type);
+                      farms[index].type,
+                      farms[index].isfavourite);
                 })
             : Center(child: CircularProgressIndicator()));
   }
